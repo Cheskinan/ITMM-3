@@ -16,6 +16,16 @@ MoreOrEqual, Unequal, LogicalOr,
 LogicalNot, LogicalAnd, BitXor,
 BitOr, BitAnd, BitLeftShift,
 BirRightShift
+
+
+
+%impl_additions "size_t digit2int(ch) {
+
+    size_t v = ch - u'0';
+
+    return (v<=9)? v:(v&ob1101'1111) - 7;
+
+}"
 %keywords
 "if" : If, 
 "then" : Then,
