@@ -1,0 +1,44 @@
+%scaner_name myfirstscaner
+%codes_type codes
+%ident_name Id
+%token_fields
+"usigned __int128 int_val; __float128 float_val;"
+%codes 
+If, Then, ElseIf, 
+Else, EndIf, For,
+While, Repeat, Until,
+Exit, Continue, Return,
+Read, Print, Equal,
+ Plus, Minus, Multiplication,
+Division,  Module, LessThan,
+MoreThan, LessThan, LessOrEqual,
+MoreOrEqual, Unequal, LogicalOr,
+LogicalNot, LogicalAnd, BitXor,
+BitOr, BitAnd, BitLeftShift,
+BirRightShift
+%keywords
+"if" : If, 
+"then" : Then,
+"elif" : ElseIf,
+"else" : Else, 
+"endif" : EndIf, 
+"for" : For,
+"while" : While, 
+"repeat" : Repeat
+%delimiters
+"=" : Equal, "+" : Plus, "-" : Minus, 
+"*" : Multiplication, "/" : Division, "%" : Module,
+"<" : LessThan, ">" : MoreThan, "<=" : LessOrEqual, 
+">=" : MoreOrEqual, "!=" : Unequal, "/.": FDiv,
+"||": LogicalOr, "!||": LogicalNor, "!":LogicalNot, 
+"&&": LogicalAnd, "!&&": LogicalNAnd, "^^": LXor,
+"!^^": LNXor, "^":BitXor, "|":BitOr,
+"~^":BNXor, "~|":BNor, "&":BitAnd, 
+"~&":BinaryAnd, "<<":BitLeftShift, ">":BirRightShift,
+"**.":FPow, "{":Openif_block, "}":endif_block, 
+"(":Open_begin_block, ")":Close_begin_block,"#":Dim_size, 
+"?":cond_op, ";":Semicolon, ",":Comma,
+"::":after_label,"[":Open_elem_mass,"]":Close_elem_mass,
+":":Colon
+
+
