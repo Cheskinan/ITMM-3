@@ -1,54 +1,78 @@
 %scaner_name myfirstscaner
 %codes_type codes
 %ident_name Id
-%token_fields
-"usigned __int128 int_val; __float128 float_val;"
-%codes 
-If, Then, ElseIf, 
-Else, EndIf, For,
-While, Repeat, Until,
-Exit, Continue, Return,
-Read, Print, Equal,
- Plus, Minus, Multiplication,
-Division,  Module, LessThan,
-MoreThan, LessThan, LessOrEqual,
-MoreOrEqual, Unequal, LogicalOr,
-LogicalNot, LogicalAnd, BitXor,
-BitOr, BitAnd, BitLeftShift,
-BirRightShift
+%class_members
+" __int128 int_value;
+__int128 fract_part;
+size_t exponent;
 
+%token_fields
+"unsigned __int128 int_val; __float128 float_val;"
+%codes 
+Int,         Float,    Bool,
+Char,        String,   Void
+If,          Const,    ElseIf, 
+Else,        EndIf,    For,
+While,       Repeat,   Until,
+Exit,        Continue, Return,
+Read,        Print,    Kw_Int, 
+Kw_float,    Kw_bool,  Kw_char, 
+Kw_string,   Kw_void,  Var, 
+Kw_array,    Proto,    Func,
+     
+Equal,            Plus,         Minus,
+Multiplication,   Division,     Module, 
+LessThan,         MoreThan,     LessThan, 
+LessOrEqual,      MoreOrEqual,  Unequal, 
+LogicalOr,        LogicalNot,   LogicalAnd, 
+BitXor,           BitOr,        BitAnd, 
+BitLeftShift,     BirRightShift
+
+%strings "buffer.clean();":"token.code=(buffer.length()==1)?Char:String;"
+{"([:ndq:]$write|""$write)*"}   
 
 
 %impl_additions "size_t digit2int(ch) {
 
-    size_t v = ch - u'0';
+    size_t v = ch - U'0';
 
-    return (v<=9)? v:(v&ob1101'1111) - 7;
+    return (v<=9)? v:(v&0b1101'1111) - 7;
 
 }"
 %keywords
-"if" : If, 
-"then" : Then,
-"elif" : ElseIf,
-"else" : Else, 
-"endif" : EndIf, 
-"for" : For,
-"while" : While, 
-"repeat" : Repeat
+"var" : Var, "int" : Kw_int, "float" : Kw_float, 
+"bool" : Kw_bool, "char" : Kw_char, "string" : Kw_string,
+ "void" : Kw_void, "array" : Kw_array,"true" : True,
+"false" : False, 'proto" : Proto, "func" : Func
+"const" : Const,  "if" : If,  "elif" : ElseIf,
+"else" : Else, "endif" : EndIf, "for" : For,
+"while" : While, "repeat" : Repeat, "until" : Until,
+"exit" : Exit, "continue" : Continue,  "return" : Return,
+ "read" : Read, "print" : Print
+
+
+
 %delimiters
 "=" : Equal, "+" : Plus, "-" : Minus, 
 "*" : Multiplication, "/" : Division, "%" : Module,
 "<" : LessThan, ">" : MoreThan, "<=" : LessOrEqual, 
-">=" : MoreOrEqual, "!=" : Unequal, "/.": FDiv,
+">=" : MoreOrEqual, "!=" : Unequal, "/.": FractDiv,
 "||": LogicalOr, "!||": LogicalNor, "!":LogicalNot, 
 "&&": LogicalAnd, "!&&": LogicalNAnd, "^^": LXor,
 "!^^": LNXor, "^":BitXor, "|":BitOr,
 "~^":BNXor, "~|":BNor, "&":BitAnd, 
 "~&":BinaryAnd, "<<":BitLeftShift, ">":BirRightShift,
-"**.":FPow, "{":Openif_block, "}":endif_block, 
-"(":Open_begin_block, ")":Close_begin_block,"#":Dim_size, 
+"**.":FractPow, "{":Openif_block, "}":endif_block, 
+"(":Open_round, ")":Close_round,"#":Dim_size, 
 "?":cond_op, ";":Semicolon, ",":Comma,
-"::":after_label,"[":Open_elem_mass,"]":Close_elem_mass,
-":":Colon
+"::":after_label,"[":Open_square,"]":Close_square,
+":":Colon, "var"
+%numbers
+%action 
+%action 
+{[:digits:]('?[:digits:])*(.[:digits:]('?[:digits:])*)?((E|e)(+|-)?[:digits:]('?[:digits:])*)?
+|0o[:odigits:]('?[:odigits:]*
+|0(b|B)[:bdigits:]('?[:bdigits:])*
+|0(x|X)[:xdigits:]('?[:xdigits:])*}
 
 
