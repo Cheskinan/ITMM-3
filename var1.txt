@@ -68,7 +68,10 @@ BitLeftShift,     BirRightShift
 "::":after_label,"[":Open_square,"]":Close_square,
 ":":Colon, "var"
 %numbers
-%action 
+%action SetFlag
+%action AddDecNumder
+%action AddNumbtoDegree
+%action AddDecNumbToFractPart
 %action 
 {[:digits:]('?[:digits:])*(.[:digits:]('?[:digits:])*)?((E|e)(+|-)?[:digits:]('?[:digits:])*)?
 |0o[:odigits:]('?[:odigits:]*
