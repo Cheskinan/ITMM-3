@@ -172,7 +172,7 @@ token.int_val = int_value;
 %action AddBinNumb "int_value = (int_value << 1) + digit2int(ch);"
 %action AddOctNumb "int_value = (int_value << 3) + digit2int(ch);"
 %action AddHexNumb "int_value = (int_value << 4) + digit2int(ch);"
-%action AddToDegr "int value = int_value " //??????
+%action AddToDegr " " //??????
 %action AddDecToFract "fract_part = fract_part*10 + digit2int(ch); ++num_of_digits;"
 %action WhatSign "sign_of_degree = (ch == U'+')?1:(-1);"
 {[:digits:]$AddDecNumder('?[:digits:]$AddDecNumder)*(.$SetFlag[:digits:]$AddDecToFract('?[:digits:]$AddDecToFract)*)?((E|e)$SetFlag(+|-)$WhatSign?[:digits:]$AddToDegr('?[:digits:]$AddToDegr)*)?
